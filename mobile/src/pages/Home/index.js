@@ -1,9 +1,20 @@
 import React from 'react';
 import { View ,Text,TouchableOpacity} from 'react-native';
 import {FontAwesome as Icon} from '@expo/vector-icons';
+import {RectButton} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
  import styles from './styles';
 
 const Home = () => {
+
+  const {navigate}= useNavigation();
+
+
+  function handleNavigateToServicesPage(){
+     navigate('ServicesPages');
+  }
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -17,29 +28,34 @@ const Home = () => {
     <View style={styles.buttonsContainer}>
       
       <View style={styles.buttonGroup}>    
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+        <RectButton
+            onPress={handleNavigateToServicesPage}  
+            style={styles.button}
+            >
           <Icon name="home" size={70} color='#F0F0F5'/>
           <Text style={styles.buttonText}>Home</Text>
-        </TouchableOpacity>
+        </RectButton>
 
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+        <RectButton 
+          style={styles.button}
+          >
           <Icon name="heart" size={60} color='#F0F0F5'/>
           <Text style={styles.buttonText}>Favoritos</Text>
-        </TouchableOpacity>
+        </RectButton>
       </View>
 
       <View style={styles.buttonGroup2}>    
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+        <RectButton activeOpacity={0.8} style={styles.button}>
           <Icon name="user" size={70} color='#F0F0F5'/>
           <Text style={styles.buttonText}>Perfil</Text>
-        </TouchableOpacity>
+        </RectButton>
 
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
+        <RectButton activeOpacity={0.8} style={styles.button}>
           <Icon name="bell" size={65} color='#F0F0F5'/>
           <Text style={styles.buttonText}>Notificações</Text>
-        </TouchableOpacity>
+        </RectButton>
       </View>
 
     </View>  

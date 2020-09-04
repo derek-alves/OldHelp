@@ -1,15 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import LandingPage from './src/pages/LandingPage';;
-import Home from './src/pages/Home';
-
-
+import AppStack from './src/routes/AppStack';
 
 export default function App() {
     return (
       <>
-        <Home/>
+        <AppStack/>
         <StatusBar style='auto'/>
       </>
     );
