@@ -4,6 +4,7 @@ import {BorderlessButton} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 
 
+
 import backIcon from '../../assets/icons/back.png';
 
 import styles from './styles';

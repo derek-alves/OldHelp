@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
       fontSize:24,
       lineHeight:32,
       maxWidth:160,
+      marginTop:20,
       marginVertical:40
     },
     oldhelp:{
