@@ -204,7 +204,7 @@ export default function LandingPage() {
               />
 
               <TextInput
-              placeholder="PASSWORDW"
+              placeholder="PASSWORD"
               style={styles.textInput}
               placeholderTextColor="black"
               />
