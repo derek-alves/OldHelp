@@ -4,7 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator}  from '@react-navigation/stack';
 import Home from '../pages/Home';
 import ServicesPages from './ServicesTab';
-
+import CreateAccount from '../pages/CreateAccount';
+import LandingPage from '../pages/LandingPage';
 
 const {Navigator,Screen} = createStackNavigator();
 
@@ -13,7 +14,10 @@ function AppStack(){
     <NavigationContainer>
        <Navigator screenOptions={{headerShown:false}}>
          <Screen name="Home" component={Home}/>
+         <Screen name="LandingPage" component={LandingPage} />
          <Screen name="ServicesPages" component={ServicesPages}/>
+         <Screen name="CreateAccount" component={CreateAccount}/>
+         
        </Navigator>
     </NavigationContainer>
   );

@@ -13,10 +13,10 @@ import {RectButton,ScrollView} from 'react-native-gesture-handler';
 const CreateAccount = () => {
   return (
     <>
-  <ScrollView
+    <ScrollView
       keyboardShouldPersistTaps="handled"
     >
-      <Header title="Crie um novo serviço" />
+      <Header title="Informe os dados abaixo" />
 
       
       <View
@@ -29,8 +29,11 @@ const CreateAccount = () => {
       
         <View style={{...styles.container,marginTop:-60}}>
             <View style={styles.InputsGroup}>
-              <Input textArea name="Descrição" icon="type" placeholder="Descrição do serviço"/>
-              <Input name="valor" icon="dollar-sign" placeholder="Preço/hora"/>
+              <Input name="name" icon="user" placeholder="Nome completo"/>
+              <Input name="email" icon="mail" placeholder="E-mail"/>
+              <Input name="telefone" icon="phone" placeholder="telefone"/>
+              <Input name="cpf" icon="key" placeholder="CPF"/>
+              <Input name="password" icon="lock" placeholder="Senha"/>
             </View>
           
 

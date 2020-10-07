@@ -6,18 +6,18 @@ const styles = StyleSheet.create({
       borderWidth:1,
       borderColor:'#e6e6f0',
       borderRadius:20,
-      height:395,
+      height:470,
       overflow:'hidden',
     },
     InputsGroup:{
     
       alignItems:'center',
-      paddingTop:24,
-      paddingVertical:30,
+      paddingVertical:20,
     },
   
     contactButton:{
       backgroundColor:'#04d361',
+      flex:1,
       height:56,
       borderRadius:8,
       flexDirection:'row',
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       marginHorizontal:20,
       marginBottom:20,
-      marginTop:-20
+      marginTop:-9
     },
 
     contactButtonText:{

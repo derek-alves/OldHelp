@@ -5,6 +5,7 @@ import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State ,RectButton} from 'react-native-gesture-handler';
 const {height,width} = Dimensions.get('window');
 
+import {useNavigation} from '@react-navigation/native';
 
 const {
   Value,
@@ -24,10 +25,21 @@ const {
   concat
 } = Animated;
 
+import Input from '../../components/Input';
+
+
+const LandingPage = () => {
+
+
+  const {navigate}= useNavigation();
+
+
+  function handleNavigateToCreateAccount(){
+     navigate('CreateAccount');
+  }
 
 
 
-export default function LandingPage() {
   function runTiming(clock, value, dest) {
     const state = {
       finished: new Value(0),
@@ -52,7 +64,7 @@ export default function LandingPage() {
         startClock(clock)
       ]),
       timing(clock, state, config),
-      cond(state.finished, debug('stop clock', stopClock(clock))),
+      cond(state.finished, stopClock(clock)),
       state.position
     ]);
   }
@@ -146,7 +158,9 @@ export default function LandingPage() {
 
       <View style={{height:height/3}}>
 
+      
         <TapGestureHandler onHandlerStateChange={onStateChange}>
+           
               <Animated.View style={{
                 ...styles.button,
                 opacity:buttonOpacity,
@@ -154,12 +168,16 @@ export default function LandingPage() {
                 }}>
                   <Text style={{fontSize:20,fontWeight:'bold'}}>SIGN IN</Text>
               </Animated.View>
+            
           </TapGestureHandler>
+      
 
-
+        <TouchableOpacity 
+        activeOpacity={0.7}
+        onPress={handleNavigateToCreateAccount}
+        >          
           <Animated.View style={{
             ...styles.button,
-            backgroundColor:'#2E71DC',
             opacity:buttonOpacity,
             transform:[{translateY:buttonY}]
             }}>
@@ -167,10 +185,11 @@ export default function LandingPage() {
               style={{
                 fontSize:20,
                 fontWeight:'bold',
-                color:'white'}}>
+                }}>
 
-                SIGN IN WITH FACEBOOK</Text>
+                SIGN UP</Text>
           </Animated.View>
+        </TouchableOpacity>
 
           <Animated.View
            style={{
@@ -180,10 +199,11 @@ export default function LandingPage() {
             zIndex:textInputZindex,
             opacity:textInputOpacity,
             transform:[{translateY:textInputY}],
-            height:height/2.5,
+            height:height/2.2,
             ...StyleSheet.absoluteFill,
             top:null,
-            justifyContent:'center'
+            justifyContent:'center',
+        
             }}>
 
               <TapGestureHandler onHandlerStateChange={onCloseState}>
@@ -197,22 +217,15 @@ export default function LandingPage() {
               </TapGestureHandler>
 
 
-              <TextInput
-              placeholder="EMAIL"
-              style={styles.textInput}
-              placeholderTextColor="black"
-              />
+              <Input name="email" icon="mail" placeholder="E-mail"/>
 
-              <TextInput
-              placeholder="PASSWORD"
-              style={styles.textInput}
-              placeholderTextColor="black"
-              />
-              
+              <Input name="password" icon="lock" placeholder="Senha"/>
+
+             
               <TouchableOpacity
               activeOpacity={0.7}
               >
-              <Animated.View elevation={5} style={styles.button}>
+              <Animated.View elevation={5} style={{...styles.button,top:-5}}>
                   
                   <Text 
                   style={{
@@ -223,12 +236,17 @@ export default function LandingPage() {
                  
               </Animated.View>
               </TouchableOpacity>
+              <TouchableOpacity>
+                    <Text style={{textAlign:"center",fontSize:16,marginTop:12}}>Esqueci minha senha</Text>
+              </TouchableOpacity>
           </Animated.View>
   
       </View>
     </View>
   );
 }
+
+export default LandingPage;
 
 const styles = StyleSheet.create({
   container: {
@@ -265,13 +283,9 @@ const styles = StyleSheet.create({
     shadowColor:'black',
     shadowOpacity:0.2
   },
-  textInput:{
-    height:50,
-    borderRadius:25,
-    borderWidth:0.5,
-    marginHorizontal:20,
-    paddingLeft:10,
-    marginVertical:5,
-    borderColor:'rgba(0,0,0,0.2)'
+  forgotPass:{
+    alignItems:'center',
+    justifyContent:'center',
   }
+
 });
