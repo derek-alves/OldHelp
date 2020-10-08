@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View , Image, Dimensions, TextInput,TouchableOpacity} from 'react-native';
+import React,{useCallback,useRef}from 'react';
+import { StyleSheet, Text, View , Image, Dimensions, TextInput,TouchableOpacity,Alert} from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State ,RectButton} from 'react-native-gesture-handler';
-const {height,width} = Dimensions.get('window');
+import * as Yup from 'yup'; 
 
-import {useNavigation} from '@react-navigation/native';
+
+import getValidationErrors from '../../utils/getValidationErrors'; 
 
 const {
   Value,
@@ -25,18 +26,57 @@ const {
   concat
 } = Animated;
 
+import {useNavigation} from '@react-navigation/native';
+import {Form} from '@unform/mobile';
+
+
+const {height,width} = Dimensions.get('window');
+
+
+
+
 import Input from '../../components/Input';
 
 
 const LandingPage = () => {
 
 
+  const formRef = useRef(null);
+  
+  const inputRef = useRef(null);
+
   const {navigate}= useNavigation();
 
 
-  function handleNavigateToCreateAccount(){
+  const handleNavigateToCreateAccount = useCallback(()=>{
      navigate('CreateAccount');
-  }
+  },[])
+
+  const handleSignIn = useCallback(async(data) => {
+    try {
+
+      formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+              email:Yup.string().required('E-mail obrigatório').email('Digite um e-mail várlido'),
+              password:Yup.string().required('Senha obrigatória').min(6,'No minimo 6 dígitos'),
+            });
+
+            await schema.validate(data,{
+              abortEarly:false
+            });
+
+          } catch (error) {
+            
+            if(error instanceof Yup.ValidationError){
+            const errors = getValidationErrors(error);
+            formRef.current?.setErrors(errors);
+              
+            return;
+          }
+          Alert.alert('Error na autenticação','Ocorreu um erro ao fazer login.');
+
+        }
+  },[]);
 
 
 
@@ -192,6 +232,7 @@ const LandingPage = () => {
         </TouchableOpacity>
 
           <Animated.View
+          keyboardShouldPersistTaps="handled"
            style={{
             backgroundColor: 'white',
             borderTopLeftRadius: 40,
@@ -216,26 +257,56 @@ const LandingPage = () => {
                 </Animated.View>
               </TapGestureHandler>
 
+        <Form ref={formRef} onSubmit={handleSignIn}>
 
-              <Input name="email" icon="mail" placeholder="E-mail"/>
 
-              <Input name="password" icon="lock" placeholder="Senha"/>
+              <Input 
+                autoCorrect={false}
+                multiline={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                name="email" 
+                icon="mail" 
+                placeholder="E-mail"
+                returnKeyType="next"
+                onSubmitEditing={()=>{
+                  inputRef.current?.focus();
+                }}
+              />
+
+              <Input 
+                ref={inputRef}
+                name="password" 
+                icon="lock" 
+                multiline={false}
+                placeholder="Senha"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={()=>{
+                  formRef.current?.submitForm();
+                }}
+              />
 
              
               <TouchableOpacity
               activeOpacity={0.7}
+              onPress={()=>{
+                formRef.current?.submitForm();
+              }}
               >
               <Animated.View elevation={5} style={{...styles.button,top:-5}}>
                   
                   <Text 
                   style={{
                     fontSize:20,
-                    fontWeight:'bold',}}>
+                    fontWeight:'bold',}}
+                    >
                     SIGN IN 
                   </Text>
                  
               </Animated.View>
               </TouchableOpacity>
+          </Form>
               <TouchableOpacity>
                     <Text style={{textAlign:"center",fontSize:16,marginTop:12}}>Esqueci minha senha</Text>
               </TouchableOpacity>
