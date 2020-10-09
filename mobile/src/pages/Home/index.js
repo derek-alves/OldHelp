@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import { View ,Text,TouchableOpacity} from 'react-native';
 import {FontAwesome as Icon} from '@expo/vector-icons';
 import {RectButton} from 'react-native-gesture-handler';
@@ -9,10 +9,13 @@ const Home = () => {
 
   const {navigate}= useNavigation();
 
-
-  function handleNavigateToServicesPage(){
+  const handleNavigateToServiceNotification = useCallback(()=>{
+    navigate('ServiceNotification');
+  },[]);
+  
+  const handleNavigateToServicesPage = useCallback(()=>{
      navigate('ServicesPages');
-  }
+  },[]);
 
 
   return (
@@ -52,7 +55,11 @@ const Home = () => {
         </RectButton>
 
 
-        <RectButton activeOpacity={0.8} style={styles.button}>
+        <RectButton 
+        onPress={handleNavigateToServiceNotification} 
+        activeOpacity={0.8} 
+        style={styles.button}
+        >
           <Icon name="bell" size={65} color='#F0F0F5'/>
           <Text style={styles.buttonText}>Notificações</Text>
         </RectButton>

@@ -58,7 +58,7 @@ const LandingPage = () => {
       formRef.current?.setErrors({});
         const schema = Yup.object().shape({
               email:Yup.string().required('E-mail obrigatório').email('Digite um e-mail várlido'),
-              password:Yup.string().required('Senha obrigatória').min(6,'No minimo 6 dígitos'),
+              password:Yup.string().required('Senha obrigatória'),
             });
 
             await schema.validate(data,{
@@ -69,11 +69,17 @@ const LandingPage = () => {
             
             if(error instanceof Yup.ValidationError){
             const errors = getValidationErrors(error);
+            const array = []
+            Object.entries(errors).forEach(entry => {
+              const [key, value] = entry;
+              array.push(value)
+            })
+            Alert.alert('Error no cadastramento',array.toString().replace(/,/g,'\n'))
+            formRef.current?.setErrors(errors);
             formRef.current?.setErrors(errors);
               
             return;
           }
-          Alert.alert('Error na autenticação','Ocorreu um erro ao fazer login.');
 
         }
   },[]);

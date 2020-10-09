@@ -11,6 +11,7 @@ return (
         <View style={styles.container}>
             <PageHeader title="Serviços disponíveis"/>
             <ScrollView 
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               paddingHorizontal:16,
               paddingBottom:16  

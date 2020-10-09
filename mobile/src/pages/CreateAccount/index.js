@@ -31,11 +31,13 @@ const CreateAccount = () => {
       formRef.current?.setErrors({});
         const schema = Yup.object().shape({
               
-              cpf:Yup.string().required('Cpf obrigatório').min(11,'CPF precisa ter 11 dígitos'),
-              email:Yup.string().required('E-mail obrigatório').email('Digite um e-mail várlido'),
+              
               name:Yup.string().required('Nome obrigatório'),
-              password:Yup.string().required('Senha obrigatória').min(6,'No minimo 6 dígitos'),
-              telefone:Yup.string().required('Telefone obrigatório').min(11,'Celular precisa ter 11 dígitos'),
+              email:Yup.string().required('E-mail obrigatório').email('Digite um e-mail várlido'),
+              telefone:Yup.string().required('Telefone obrigatório').min(11,'Telefone precisa ter 11 dígitos'),
+              cpf:Yup.string().required('CPF obrigatório').min(11,'CPF precisa ter 11 dígitos'),
+              password:Yup.string().required('Senha obrigatória').min(6,'Senha no minimo 6 dígitos'),
+              
               
             });
 
@@ -47,9 +49,12 @@ const CreateAccount = () => {
             
             if(error instanceof Yup.ValidationError){
             const errors = getValidationErrors(error);
-            const array = (Object.entries(errors))
-            console.log(array[0][1]);
-            Alert.alert('Error no cadastramento',errors.cpf);
+            const array = []
+            Object.entries(errors).forEach(entry => {
+              const [key, value] = entry;
+              array.push(value)
+            })
+            Alert.alert('Error no cadastramento',array.toString().replace(/,/g,'\n'))
             formRef.current?.setErrors(errors);
             
             return;
