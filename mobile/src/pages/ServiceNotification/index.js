@@ -26,11 +26,11 @@ const ServiceNotification = () => {
       <ScrollView
      showsVerticalScrollIndicator={false}
       >
-      <CardNotification 
-      name="Derek Enrique Alves"
-      cargo="Programador"
-      servico="Programar site de uma padaria"
-      />
+        <CardNotification 
+              name="Derek Enrique Alves"
+              cargo="Programador"
+              servico="Programar site de uma padaria"
+        />
 
         <CardNotification 
               name="Derek Enrique Alves"
