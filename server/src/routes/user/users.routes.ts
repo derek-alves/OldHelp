@@ -2,15 +2,15 @@ import { parseISO } from "date-fns";
 import { Router, Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 
-import UsersRepository from "../repositories/UsersRepository";
-import CreateUsersService from "../services/CreateUsersService";
+import UsersRepository from "../../repositories/UsersRepository";
+import CreateUsersService from "../../services/CreateUsersService";
 
 
 const usersRouter = Router();
 
-usersRouter.get("/", (request: Request, response: Response) => {
+usersRouter.get("/", async (request: Request, response: Response) => {
   const usersRepository = getCustomRepository(UsersRepository);
-  const users = usersRepository.find();
+  const users = await usersRepository.find();
 
   return response.json(users);
 });
@@ -32,7 +32,7 @@ usersRouter.post("/", async (request: Request, response: Response) => {
     const parseDate = parseISO(data);
 
     const createUser = new CreateUsersService();
-
+    
     const user = await createUser.execute({
       name,
       email,

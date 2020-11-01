@@ -18,12 +18,13 @@ interface Request{
 }
 
 class CreateUsersService{
+
   public async execute({name,email,data,dataNasci,cidade,rg,cpf,senha,celular}:Request):Promise<Users>{
 
     const usersRepository = getCustomRepository(UsersRepository)
     const usersDate = startOfHour(data);
 
-    const findUserInSameDate = usersRepository.findByData(
+    const findUserInSameDate = await usersRepository.findByData(
       usersDate,
     );
 

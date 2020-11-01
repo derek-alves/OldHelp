@@ -11,6 +11,7 @@ export class CreateUser1603211416127 implements MigrationInterface {
             type: "varchar",
             isPrimary: true,
             generationStrategy: "uuid",
+            default:'uuid_generate_v4()',
           },
           {
             name: "name",
@@ -29,7 +30,7 @@ export class CreateUser1603211416127 implements MigrationInterface {
           },
           {
              name:"dataNasci",
-             type:"date",
+             type:"varchar",
              isNullable:false 
           },
           {
