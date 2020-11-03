@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateServices1604246233850 implements MigrationInterface {
+export class CreateUser1604420882196 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "services",
+        name: "users",
         columns: [
           {
             name: "id",
@@ -15,44 +15,49 @@ export class CreateServices1604246233850 implements MigrationInterface {
             generationStrategy: "increment",
           },
           {
-            name: "title",
+            name: "name",
             type: "varchar",
             isNullable: false,
           },
           {
-            name: "description",
+            name: "email",
             type: "varchar",
             isNullable: false,
           },
           {
-            name: "price",
+            name: "created_at",
+            type: "timestamp",
+            default: "now()",
+          },
+          {
+            name: "dataNasci",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "cidade",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "rg",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "cpf",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "senha",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
+            name: "celular",
             type: "integer",
             isNullable: false,
-          },
-          {
-            name: "date",
-            type: "varchar",
-            isNullable: false,
-          },
-          {
-            name: "status",
-            type: "varchar",
-            isNullable: false,
-          },
-          {
-              name:'user_id',
-              type:'varchar'
-          }
-        ],
-
-        foreignKeys: [
-          {
-            name: "UserService",
-            columnNames: ["user_id"],
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
           },
         ],
       })
@@ -60,6 +65,6 @@ export class CreateServices1604246233850 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('services');
+    await queryRunner.dropTable("users");
   }
 }

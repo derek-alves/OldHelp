@@ -16,7 +16,6 @@ class ServicesHasUsers {
   @Column({type:"float"})
   value: number;
 
- 
   @Column("timestamp with time zone")
   date: Date;
 
@@ -24,7 +23,7 @@ class ServicesHasUsers {
   status: string;
 
   @Column()
-  user_id:string;
+  user_id:number;
 
   @Column()
   service_id:number;
@@ -35,7 +34,7 @@ class ServicesHasUsers {
 
   @ManyToOne(()=>Services, services => services.services)
   @JoinColumn({name:'service_id'})
-  service:Services;
+  services:Services;
 }
 
 export default ServicesHasUsers;

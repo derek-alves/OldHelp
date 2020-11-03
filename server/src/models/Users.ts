@@ -1,11 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn,OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn,OneToMany, CreateDateColumn } from "typeorm";
 import Services from './Services';
 import Services_has_user from './Services_has_users';
 
 @Entity("users")
 class Users {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn("increment")
+  id: number;
 
   @Column()
   name: string;
@@ -13,11 +13,11 @@ class Users {
   @Column()
   email: string;
 
-  @Column("timestamp with time zone")
-  data: Date;
+  @CreateDateColumn()
+  created_at: Date;
 
-  @Column("date")
-  dataNasci: Date;
+  @Column()
+  dataNasci: string;
 
   @Column()
   cidade: string;

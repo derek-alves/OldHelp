@@ -1,54 +1,12 @@
-import { parseISO } from "date-fns";
-import { Router, Request, Response } from "express";
-import { getCustomRepository } from "typeorm";
-
-import UsersRepository from "../../repositories/UsersRepository";
-import CreateUsersService from "../../services/CreateUsersService";
-
+import { Router } from "express";
+import userController from "../../controllers/userController";
 
 const usersRouter = Router();
 
-usersRouter.get("/", async (request: Request, response: Response) => {
-  const usersRepository = getCustomRepository(UsersRepository);
-  const users = await usersRepository.find();
+usersRouter.get("/", userController.index);
 
-  return response.json(users);
-});
+usersRouter.get("/:id", userController.show);
 
-usersRouter.post("/", async (request: Request, response: Response) => {
-  try {
-    const {
-      name,
-      email,
-      data,
-      dataNasci,
-      cidade,
-      rg,
-      cpf,
-      senha,
-      celular,
-    } = request.body;
-
-    const parseDate = parseISO(data);
-
-    const createUser = new CreateUsersService();
-    
-    const user = await createUser.execute({
-      name,
-      email,
-      data: parseDate,
-      dataNasci,
-      cidade,
-      rg,
-      cpf,
-      senha,
-      celular,
-    });
-
-    return response.json(user);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
-});
+usersRouter.post("/", userController.create);
 
 export default usersRouter;

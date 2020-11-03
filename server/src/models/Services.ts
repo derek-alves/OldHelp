@@ -15,23 +15,22 @@ class Services {
   description: string;
 
   @Column({type:"float"})
-  value: number;
+  price: number;
 
- 
-  @Column("timestamp with time zone")
-  date: Date;
+  @Column()
+  date:string;
 
   @Column()
   status: string;
 
   @Column()
-  user_id:string;
+  user_id:number;
 
   @ManyToOne(()=> Users,user => user.services)
   @JoinColumn({name:'user_id'})
   user:Users;
 
-  @OneToMany(()=>Services_has_user, services_has_user => services_has_user.service,{
+  @OneToMany(()=>Services_has_user, services_has_user => services_has_user.services,{
     cascade:['insert','update']
   })
   @JoinColumn({name:'service_id'})
