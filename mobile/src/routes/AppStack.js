@@ -14,8 +14,8 @@ function AppStack(){
   return(
     <NavigationContainer>
        <Navigator screenOptions={{headerShown:false}}>
-         <Screen name="Home" component={Home}/>
          <Screen name="LandingPage" component={LandingPage} />
+         <Screen name="Home" component={Home}/>
          <Screen name="ServicesPages" component={ServicesPages}/>
          <Screen name="CreateAccount" component={CreateAccount}/>
          <Screen name="ServiceNotification" component={ServiceNotification}/>
