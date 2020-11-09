@@ -26,6 +26,9 @@ class Users {
   rg: string;
 
   @Column()
+  avatar:string;
+  
+  @Column()
   cpf: string;
 
   @Column()

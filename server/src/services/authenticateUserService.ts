@@ -33,9 +33,11 @@ class AuthenticateUSerService{
       throw new Error('Incorrect email/password combination.');
      }
 
-     const token = sign({},authConfig.jwt.screte,{
+    const { secret, expiresIn} = authConfig.jwt;
+
+     const token = sign({},secret,{
        subject:String(user.id),
-       expiresIn:authConfig.jwt.expiresIn,
+       expiresIn
      });
 
      return{

@@ -11,7 +11,7 @@ export default {
     try {
       const { title, description, price, date } = request.body;
 
-      const { id } = request.params;
+      const { id } = request.user;
 
       const Status = "Aberto";
 
