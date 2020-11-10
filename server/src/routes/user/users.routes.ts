@@ -4,7 +4,6 @@ import multer from "multer";
 import userController from "../../controllers/userController";
 import ensureAuthenticated from "../../middlewares/ensureAuthenticated";
 
-import updateUserAvatarService from "../../services/updateUserAvatarService";
 
 import uploadConfig from "../../config/upload";
 import UpdateUserAvatarService from "../../services/updateUserAvatarService";

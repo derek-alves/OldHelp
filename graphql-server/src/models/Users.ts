@@ -7,7 +7,6 @@ import Services_has_user from './Services_has_users';
 @Entity("users")
 @ObjectType()
 class Users extends BaseEntity{
-
   @Field(()=>ID)
   @PrimaryGeneratedColumn("increment")
   id: number;
@@ -44,12 +43,12 @@ class Users extends BaseEntity{
   @Column()
   senha: string;
 
-  @Field(() => Number)
-  @Column("integer")
+  @Field()
+  @Column()
   celular: number;
 
   
-  @OneToMany(()=>Services, service => service.user,{
+  @OneToMany(() => Services, service => service.user,{
     cascade:['insert','update']
   })
   @JoinColumn({name:'user_id'})

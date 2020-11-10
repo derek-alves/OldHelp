@@ -17,25 +17,16 @@ class Users {
   created_at: Date;
 
   @Column()
-  dataNasci: string;
-
-  @Column()
-  cidade: string;
-
-  @Column()
-  rg: string;
-
-  @Column()
   avatar:string;
   
   @Column()
   cpf: string;
 
   @Column()
-  senha: string;
+  password: string;
 
-  @Column("integer")
-  celular: number;
+  @Column()
+  telefone: string;
 
   @OneToMany(()=>Services, service => service.user,{
     cascade:['insert','update']

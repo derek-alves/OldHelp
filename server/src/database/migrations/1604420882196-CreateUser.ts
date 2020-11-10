@@ -30,35 +30,25 @@ export class CreateUser1604420882196 implements MigrationInterface {
             default: "now()",
           },
           {
-            name: "dataNasci",
-            type: "varchar",
-            isNullable: false,
-          },
-          {
-            name: "cidade",
-            type: "varchar",
-            isNullable: false,
-          },
-          {
-            name: "rg",
-            type: "varchar",
-            isNullable: false,
-          },
-          {
             name: "cpf",
             type: "varchar",
             isNullable: false,
           },
           {
-            name: "senha",
+            name: "password",
             type: "varchar",
             isNullable: false,
           },
           {
-            name: "celular",
-            type: "integer",
+            name: "telefone",
+            type: "varchar",
             isNullable: false,
           },
+          {
+            name: "avatar",
+            type: "varchar",
+            isNullable: true,
+          }
         ],
       })
     );

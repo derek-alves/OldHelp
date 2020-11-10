@@ -1,18 +1,21 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
+
 import { CreateUserInput } from "../inputs/CreateUserInput";
 import UsersModel from "../models/Users";
+import Teste from '../models/Teste';
+import { TesteInput } from "../inputs/CreateTesteInput";
 
 @Resolver()
 export class BookResolver {
-  @Query(() => [UsersModel])
-  users() {
-    return UsersModel.find();
+  @Query(() => [Teste])
+  teste() {
+    return Teste.find();
   }
 
-  @Mutation(() => UsersModel)
-  async createUser(@Arg("data") data: CreateUserInput) {
-    const user = UsersModel.create(data);
-    await user.save();
-    return user;
+  @Mutation(() => Teste)
+  async creatTeste(@Arg("data") data: TesteInput) {
+    const teste = Teste.create(data);
+    await teste.save()
+    return teste;
   }
 }

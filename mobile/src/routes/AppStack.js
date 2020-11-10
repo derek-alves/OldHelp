@@ -7,6 +7,7 @@ import ServicesPages from './ServicesTab';
 import CreateAccount from '../pages/CreateAccount';
 import LandingPage from '../pages/LandingPage';
 import ServiceNotification from '../pages/ServiceNotification';
+import SignIn from '../pages/SignIn';
 
 const {Navigator,Screen} = createStackNavigator();
 
@@ -16,6 +17,7 @@ function AppStack(){
        <Navigator screenOptions={{headerShown:false}}>
          <Screen name="LandingPage" component={LandingPage} />
          <Screen name="Home" component={Home}/>
+        <Screen name="SignIn" component={SignIn}/>
          <Screen name="ServicesPages" component={ServicesPages}/>
          <Screen name="CreateAccount" component={CreateAccount}/>
          <Screen name="ServiceNotification" component={ServiceNotification}/>

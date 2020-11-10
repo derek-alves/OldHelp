@@ -12,12 +12,9 @@ export default {
       const {
         name,
         email,
-        dataNasci,
-        cidade,
-        rg,
         cpf,
-        senha,
-        celular,
+        password,
+        telefone,
       } = request.body;
 
       const checkUserExists = await usersRepository.findOne({where:{email}});
@@ -25,17 +22,14 @@ export default {
       if(checkUserExists){
         throw new Error('Email address already used.');
       }
-      const hashedPassword = await hash(senha,8);
+      const hashedPassword = await hash(password,8);
 
       const user = usersRepository.create({
         name,
         email,
-        dataNasci,
-        cidade,
-        rg,
         cpf,
-        senha:hashedPassword,
-        celular,
+        password:hashedPassword,
+        telefone,
       });
 
       await usersRepository.save(user);
