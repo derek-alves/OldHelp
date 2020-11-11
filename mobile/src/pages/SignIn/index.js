@@ -35,10 +35,12 @@ const SignIn = () => {
         abortEarly: false,
       });
 
-      await signIn({
+     await signIn({
         email: data.email,
         password: data.password,
       });
+
+      
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         const errors = getValidationErrors(error);
@@ -48,7 +50,7 @@ const SignIn = () => {
           array.push(value);
         });
         Alert.alert(
-          "Error no cadastramento",
+          "Error no logar",
           array.toString().replace(/,/g, "\n")
         );
         formRef.current?.setErrors(errors);

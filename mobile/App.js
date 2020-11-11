@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import AppStack from './src/routes/AppStack';
+import Routes from './src/routes';
 import AppProvider from './src/hooks';
 
 export default function App() {
     return (
       <>
       <AppProvider>
-        <AppStack/>
+        <Routes/>
       </AppProvider>
         <StatusBar style='light'/>
       </>

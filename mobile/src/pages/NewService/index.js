@@ -3,6 +3,7 @@ import { View ,Text,Image,Alert} from 'react-native';
 import {RectButton,ScrollView} from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 import {Form} from '@unform/mobile';
+import { useNavigation } from "@react-navigation/native";
 
 
 import styles from './styles';
@@ -14,9 +15,10 @@ import Input from '../../components/Input';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 
-
+import api from "../../services/api";
 
 const CreateService = () => {
+  const navigation = useNavigation();
 
   const formRef = useRef(null);
 
@@ -25,13 +27,18 @@ const CreateService = () => {
       console.log(data);
       formRef.current?.setErrors({});
         const schema = Yup.object().shape({
-              descricao:Yup.string().required('Descrição obrigatória').min(20,'Descrição muito curta'),
-              valor:Yup.number().typeError('Informe o valor').required('Valor obrigatório'),
+              title:Yup.string().required("Titulo obrigatório"),
+              description:Yup.string().required('Descrição obrigatória').min(20,'Descrição muito curta'),
+              price:Yup.number().typeError('Informe o valor').required('Valor obrigatório'),
             });
 
             await schema.validate(data,{
               abortEarly:false
             });
+
+            await api.post("/service", data);
+
+            navigation.goBack();
 
           } catch (error) {
             
@@ -70,8 +77,9 @@ const CreateService = () => {
         <View style={{...styles.container,marginTop:-60}}>
           <Form ref={formRef} onSubmit={handleCreateService}>
                 <View style={styles.InputsGroup}>
-                  <Input textArea name="descricao" multiline={true} icon="type" placeholder="Descrição do serviço"/>
-                  <Input name="valor" keyboardType="number-pad" icon="dollar-sign" placeholder="Preço/hora"/>
+                  <Input name="title"  icon="type" placeholder="Titulo"/>
+                  <Input textArea name="description" multiline={true} icon="type" placeholder="Descrição do serviço"/>
+                  <Input name="price" keyboardType="number-pad" icon="dollar-sign" placeholder="Preço/hora"/>
                 </View>
               
 

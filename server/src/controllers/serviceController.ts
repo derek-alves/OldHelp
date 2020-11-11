@@ -19,7 +19,6 @@ export default {
         title,
         description,
         price,
-        date,
         status: Status,
         user_id:parseInt(id)
       });

@@ -57,7 +57,7 @@ const CreateAccount = () => {
 
       Alert.alert('Cadastro realizado com sucesso!','Você ja pode fazer login.')
 
-      navigation.navigate("LandingPage");
+      navigation.navigate("SignIn");
 
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

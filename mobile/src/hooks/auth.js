@@ -57,8 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = useCallback(async () => {
     await AsyncStorage.multiRemove(["@OldHelp:token", "@OldHelp:user"]);
-
-    setData();
+    setData({});
   }, []);
 
   const updateUser = useCallback(

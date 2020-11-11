@@ -4,7 +4,7 @@ import {Feather} from "@expo/vector-icons";
 export const Container = styled.View`
     
     height:${
-        (props)=> props.textArea ? '200px': '60px'
+        (props)=> props.textArea ? '130px': '60px'
     };
     border-Radius:25px;
     border-Width:2px;
