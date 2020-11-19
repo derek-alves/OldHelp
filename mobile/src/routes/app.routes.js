@@ -4,6 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../pages/Home";
 import ServicesPages from "./ServicesTab";
 import CreateAccount from "../pages/CreateAccount";
+import Profile from '../pages/Profile';
+
 
 import ServiceNotification from "../pages/ServiceNotification";
 import SignIn from "../pages/SignIn";
@@ -19,6 +21,7 @@ function AppRoutes() {
         <Screen name="ServicesPages" component={ServicesPages} />
         <Screen name="CreateAccount" component={CreateAccount} />
         <Screen name="ServiceNotification" component={ServiceNotification} />
+        <Screen name="Profile" component={Profile} />
       </Navigator>
     </NavigationContainer>
   );

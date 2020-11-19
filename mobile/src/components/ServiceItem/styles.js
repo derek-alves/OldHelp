@@ -58,28 +58,21 @@ const styles = StyleSheet.create({
       fontSize:16
     },
     buttonsContainer:{
-      flexDirection:'row',
-      marginTop:16
+      flex:1,
+      marginTop:16,
+      justifyContent:"center",
+      alignItems:"center"
     },
-    favoriteButton:{
-      backgroundColor:'#04d361',
-      width:56,
-      height:56,
-      borderRadius:8,
-      justifyContent:'center',
-      alignItems:'center',
-      marginRight:8
-    },
-
+  
     contactButton:{
       backgroundColor:'#04d361',
       flex:1,
       height:56,
+      width:300,
       borderRadius:8,
       flexDirection:'row',
       justifyContent:'center',
       alignItems:'center',
-      marginRight:8
     },
 
     contactButtonText:{

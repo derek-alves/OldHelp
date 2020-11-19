@@ -38,7 +38,7 @@ class Users {
     cascade:['insert','update']
   })
   @JoinColumn({name:'user_id'})
-  services_has_user:Services_has_user;
+  ServicesHasUser:Services_has_user;
 }
 
 export default Users;

@@ -24,7 +24,7 @@ const CreateService = () => {
 
   const handleCreateService = useCallback(async(data) => {
     try {
-      console.log(data);
+      
       formRef.current?.setErrors({});
         const schema = Yup.object().shape({
               title:Yup.string().required("Titulo obrigatório"),
@@ -38,6 +38,7 @@ const CreateService = () => {
 
             await api.post("/service", data);
 
+            console.log(data);
             navigation.goBack();
 
           } catch (error) {

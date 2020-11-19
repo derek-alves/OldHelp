@@ -18,9 +18,6 @@ class Services {
   price: number;
 
   @Column()
-  date:string;
-
-  @Column()
   status: string;
 
   @Column()

@@ -8,6 +8,7 @@ export default function App() {
       <>
       <AppProvider>
         <Routes/>
+       
       </AppProvider>
         <StatusBar style='light'/>
       </>

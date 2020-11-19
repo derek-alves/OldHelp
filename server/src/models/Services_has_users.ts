@@ -2,22 +2,10 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "t
 import Users from "./Users";
 import Services from './Services';
 
-@Entity("services_has_users")
+@Entity("ServicesHasUsers")
 class ServicesHasUsers {
   @PrimaryGeneratedColumn("increment")
   id: number;
-
-  @Column()
-  title: string;
-
-  @Column()
-  description: string;
-
-  @Column({type:"float"})
-  value: number;
-
-  @Column("timestamp with time zone")
-  date: Date;
 
   @Column()
   status: string;
@@ -28,7 +16,7 @@ class ServicesHasUsers {
   @Column()
   service_id:number;
 
-  @ManyToOne(()=>Users, user => user.services_has_user)
+  @ManyToOne(()=>Users, user => user.ServicesHasUser)
   @JoinColumn({name:'user_id'})
   user_has_service:Users;
 

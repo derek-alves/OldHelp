@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
-import { View, Text, TouchableOpacity, Button,Image } from "react-native";
+import { View, Text, TouchableOpacity, Button, Image } from "react-native";
 import { FontAwesome as Icon } from "@expo/vector-icons";
 import { BorderlessButton } from "react-native-gesture-handler";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import backIcon from '../../assets/icons/back.png';
-
+import backIcon from "../../assets/icons/back.png";
 
 import { useAuth } from "../../hooks/auth";
 const Home = () => {
@@ -15,6 +14,10 @@ const Home = () => {
 
   const handleNavigateToServiceNotification = useCallback(() => {
     navigate("ServiceNotification");
+  }, []);
+
+  const handleNavigateToProfile = useCallback(() => {
+    navigate("Profile");
   }, []);
 
   const handleNavigateToServicesPage = useCallback(() => {
@@ -44,7 +47,11 @@ const Home = () => {
         </View>
 
         <View style={styles.buttonGroup2}>
-          <RectButton activeOpacity={0.8} style={styles.button}>
+          <RectButton
+            onPress={handleNavigateToProfile}
+            activeOpacity={0.8}
+            style={styles.button}
+          >
             <Icon name="user" size={70} color="#F0F0F5" />
             <Text style={styles.buttonText}>Perfil</Text>
           </RectButton>
@@ -59,7 +66,7 @@ const Home = () => {
           </RectButton>
         </View>
         <BorderlessButton onPress={signOut}>
-          <Text style={{paddingVertical:20}}>Deslogar</Text>
+          <Text style={{ paddingVertical: 20 }}>Deslogar</Text>
         </BorderlessButton>
       </View>
     </View>
