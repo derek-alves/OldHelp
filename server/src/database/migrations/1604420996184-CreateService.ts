@@ -31,11 +31,6 @@ export class CreateService1604420996184 implements MigrationInterface {
                   isNullable: false,
                 },
                 {
-                  name: "date",
-                  type: "varchar",
-                  isNullable: false,
-                },
-                {
                   name: "status",
                   type: "varchar",
                   isNullable: false,

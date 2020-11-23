@@ -1,42 +1,37 @@
-import { getRepository } from "typeorm";
+import { getConnection, getRepository } from "typeorm";
 import { Request, Response } from "express";
 import Connection from "../models/Services_has_users";
-import  Services from  '../models/Services';
-import  User from '../models/Users';
+import Services from "../models/Services";
+import User from "../models/Users";
+import { set } from "date-fns";
 
 export default {
-
-  async deleteUsersInConnections(request: Request, response: Response){
+  async deleteUsersInConnections(request: Request, response: Response) {
     const { id } = request.user;
- 
-    const Users = await getRepository(Services).find({
-      where:{
-        user_id:id
-      },
-      join:{
-        alias:"services",
-        leftJoinAndSelect:{
-          "users":"services.user"
-        }
-      }
-    })
-    return response.json(Users);
+
+    const con = await getRepository(Connection)
+      .createQueryBuilder("connection")
+      .update()
+      .set({ status: "aceito" }).where({user_id:id}).andWhere("service_id =:id",{id})
+      .set({status:"rejeitado"}).where({service_id:id});
+
+    return response.json({ message: "foi" });
   },
   async indexUsersConnections(request: Request, response: Response) {
     const { id } = request.user;
- 
+
     const Users = await getRepository(Services).find({
-      where:{
-        user_id:id
+      where: {
+        user_id: id,
       },
-      join:{
-        alias:"services",
-        leftJoinAndSelect:{
-          "ServicesHasUsers":"services.services",
-          "users":"ServicesHasUsers.user_has_service"
-        }
-      }
-    })
+      join: {
+        alias: "services",
+        leftJoinAndSelect: {
+          ServicesHasUsers: "services.services",
+          users: "ServicesHasUsers.user_has_service",
+        },
+      },
+    });
     return response.json(Users);
   },
   async indexConnections(request: Request, response: Response) {
