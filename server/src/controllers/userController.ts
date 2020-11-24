@@ -42,7 +42,7 @@ export default {
 
   async show(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const { id } = request.user;
 
       const userRepository = getRepository(Users);
 

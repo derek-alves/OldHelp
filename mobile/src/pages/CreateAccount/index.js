@@ -13,10 +13,7 @@ import api from "../../services/api";
 
 import { useNavigation } from "@react-navigation/native";
 
-import {
-  RectButton,
-  ScrollView,
-} from "react-native-gesture-handler";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
 
 const CreateAccount = () => {
   const navigation = useNavigation();
@@ -30,53 +27,58 @@ const CreateAccount = () => {
 
   const passwordInputRef = useRef(null);
 
-  const handleCreateAccount = useCallback(async (data) => {
-    try {
-      formRef.current?.setErrors({});
-      const schema = Yup.object().shape({
-        name: Yup.string().required("Nome obrigatório"),
-        email: Yup.string()
-          .required("E-mail obrigatório")
-          .email("Digite um e-mail várlido"),
-        telefone: Yup.string()
-          .required("Telefone obrigatório")
-          .min(11, "Telefone precisa ter 11 dígitos"),
-        cpf: Yup.string()
-          .required("CPF obrigatório")
-          .min(11, "CPF precisa ter 11 dígitos"),
-        password: Yup.string()
-          .required("Senha obrigatória")
-          .min(6, "Senha no minimo 6 dígitos"),
-      });
-
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-
-      await api.post("/user", data);
-
-      Alert.alert('Cadastro realizado com sucesso!','Você ja pode fazer login.')
-
-      navigation.navigate("SignIn");
-
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
-        const array = [];
-        Object.entries(errors).forEach((entry) => {
-          const [key, value] = entry;
-          array.push(value);
+  const handleCreateAccount = useCallback(
+    async (data) => {
+      try {
+        formRef.current?.setErrors({});
+        const schema = Yup.object().shape({
+          name: Yup.string().required("Nome obrigatório"),
+          email: Yup.string()
+            .required("E-mail obrigatório")
+            .email("Digite um e-mail várlido"),
+          telefone: Yup.string()
+            .required("Telefone obrigatório")
+            .min(11, "Telefone precisa ter 11 dígitos"),
+          cpf: Yup.string()
+            .required("CPF obrigatório")
+            .min(11, "CPF precisa ter 11 dígitos"),
+          password: Yup.string()
+            .required("Senha obrigatória")
+            .min(6, "Senha no minimo 6 dígitos"),
         });
-        Alert.alert(
-          "Error no cadastramento",
-          array.toString().replace(/,/g, "\n")
-        );
-        formRef.current?.setErrors(errors);
 
-        return;
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+        
+        const response = await api.post("/user", data);
+        console.log(response)
+        Alert.alert(
+          "Cadastro realizado com sucesso!",
+          "Você ja pode fazer login."
+        );
+
+        navigation.navigate("SignIn");
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+          const array = [];
+          Object.entries(errors).forEach((entry) => {
+            const [key, value] = entry;
+            array.push(value);
+          });
+          Alert.alert(
+            "Error no cadastramento",
+            array.toString().replace(/,/g, "\n")
+          );
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
       }
-    }
-  }, [navigation]);
+    },
+    [navigation]
+  );
 
   return (
     <>
