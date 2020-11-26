@@ -20,7 +20,7 @@ const PageHeader = ({title}) => {
   <View style={styles.container}>
     <View style={styles.topBar}>
       <BorderlessButton onPress={handleGoBack}>
-          <Image source={backIcon} resizeMode="contain"/>
+          <Image elevation={15} source={backIcon} resizeMode="contain"/>
       </BorderlessButton>
 
       <Text style={styles.oldhelp}>OldHelp</Text>

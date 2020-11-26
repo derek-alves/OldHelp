@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     },
     oldhelp:{
       fontSize:15,
-      color:'#FFF'
+      color:'#FFF',
+      fontFamily:"Poppins_600SemiBold"
     }
 })
 

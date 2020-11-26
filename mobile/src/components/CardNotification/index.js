@@ -6,7 +6,7 @@ import {Feather} from "@expo/vector-icons";
 
 const CardNotification = () => {
   return (
-    <Container>
+    <Container elevation={3}>
       <Profile>
         <ProfileInfo>
           <Name>Derek Enrique alves</Name>
@@ -16,10 +16,10 @@ const CardNotification = () => {
       </Profile>
 
       <ButtonsContainer>
-          <FavoriteButton>
+          <FavoriteButton >
                <Feather color="#FFF" size={25} name="heart"/>
           </FavoriteButton>
-          <AcceptButton>
+          <AcceptButton >
               <TextAcceptButton>
                 Confirmar
               </TextAcceptButton>

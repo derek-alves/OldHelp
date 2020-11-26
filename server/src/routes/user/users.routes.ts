@@ -27,14 +27,13 @@ usersRouter.patch(
     try {
       const updateUserAvatar = new UpdateUserAvatarService();
 
-      const user = await updateUserAvatar.execute({
+       await updateUserAvatar.execute({
         user_id: request.user.id,
         avatarFilename: request.file.filename,
       });
-
-      return response.json(user);
+      return response.json({message:"Upload image sucesse"});
     } catch (err) {
-      return response.status(400).json({ error: err.message });
+       throw err;
     }
   }
 );

@@ -1,24 +1,29 @@
-import React,{useState,useEffect} from "react";
-import { Text, Image, TouchableOpacity, StyleSheet,View} from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { Text, Image, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import Header from "../../components/PageHeader";
-import { RectButton } from "react-native-gesture-handler";
 import { FontAwesome } from "@expo/vector-icons";
-import * as ImagePicker from 'expo-image-picker';
-import api from '../../services/api';
+import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
+import api from "../../services/api";
 
-
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons";
 import { Container, ProfileContent, Body, Name } from "./styles";
+import { Restart } from "fiction-expo-restart";
 
 function Profile() {
-  const [services,setServices] = useState([]);
-  const [images, setImages] = useState([]);
+  const { goBack } = useNavigation();
+
+  const handleNavigateTohome = useCallback(() => {
+    goBack();
+  }, []);
+
+  const [services, setServices] = useState([]);
 
   async function handleSelectImages() {
     const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
 
-    if (status !== 'granted') {
-      alert('Eita, precisamos de acesso às suas fotos!');
+    if (status !== "granted") {
+      alert("Eita, precisamos de acesso às suas fotos!");
       return;
     }
 
@@ -32,83 +37,96 @@ function Profile() {
       return;
     }
 
-    const { uri: image } = result;
-    setImages([...images, image]);
+    const data = new FormData();
+
+    data.append("avatar", {
+      type: "image/jpg",
+      name: `${services.id}.jpg`,
+      uri: result.uri,
+    });
+
+    await api.patch("/user/avatar", data);
+
+    Alert.alert("Upload imagem", "Imagem atualizada com sucesso");
+    handleNavigateTohome();
   }
 
-
-
-
-  async function loadProfile(){
+  async function loadProfile() {
     const response = await api.get("/user/show");
     setServices(response.data);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     loadProfile();
-  },[])
+  }, []);
   return (
     <Container>
       <Header />
-    
-      <ProfileContent>
-      
-     
-      <TouchableOpacity style={styles.imagesInput} onPress={handleSelectImages}>
-        <Text style={{marginBottom:10, fontFamily:'Poppins_500Medium',fontSize:20}}>Imagem do perfil</Text>
-        <Feather name="plus" size={50} color="black" />
-      </TouchableOpacity>
- 
-       {
-        services.avatar ? <Image
-        style={{
-          width: 150,
-          height: 150,
-          borderRadius: 100,
-          marginTop: -110,
-          zIndex: 2,
-        }}
-        source={require("../../assets/0.jpeg")}
-      /> : console.log("não foi")
-       }
 
-        <Body>
-          
-        <Name>{services.name}</Name>
-        <Text style={{ fontSize: 20 }}>{services.email}</Text>
-  
+      <ProfileContent>
+        {services.avatar ? (
+          <Image
+            elevation={5}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: 100,
+              marginTop: -110,
+              zIndex: 2,
+            }}
+            source={{ uri: `http://192.168.1.9:3333/files/${services.avatar}` }}
+          />
+        ) : (
+          <TouchableOpacity
+            elevation={5}
+            style={styles.imagesInput}
+            onPress={handleSelectImages}
+          >
+            <Text
+              style={{
+                marginBottom: 10,
+                fontFamily: "Poppins_500Medium",
+                fontSize: 20,
+              }}
+            >
+              Imagem do perfil
+            </Text>
+            <Feather name="plus" size={50} color="black" />
+          </TouchableOpacity>
+        )}
+
+        <Body elevation={3}>
+          <Name>{services.name}</Name>
+          <Text style={{ fontSize: 20 }}>{services.email}</Text>
 
           <TouchableOpacity
+          elevation={5}
             style={{
-              flexDirection:"row",
-              justifyContent:"center",
+              flexDirection: "row",
+              justifyContent: "center",
               alignItems: "center",
               padding: 15,
               borderRadius: 8,
               width: "85%",
               borderWidth: 2,
               borderColor: "#04d361",
-              marginTop:30
+              marginTop: 30,
             }}
           >
-             <FontAwesome name="whatsapp" color="#04d361" size={20} />
+            <FontAwesome name="whatsapp" color="#04d361" size={20} />
             <Text
               style={{
                 color: "#04d361",
                 fontWeight: "bold",
                 fontSize: 18,
                 marginLeft: 16,
-              
               }}
             >
               Entrar em contato
             </Text>
           </TouchableOpacity>
         </Body>
-       
       </ProfileContent>
-
-      
     </Container>
   );
 }
@@ -116,10 +134,10 @@ function Profile() {
 export default Profile;
 const styles = StyleSheet.create({
   uploadedImagesContaier: {
-    flexDirection: 'row',
-    justifyContent:'center',
-    marginTop:40,
-    zIndex:2
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 40,
+    zIndex: 2,
   },
 
   uploadedImage: {
@@ -131,19 +149,18 @@ const styles = StyleSheet.create({
   },
 
   imagesInput: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderStyle: 'dashed',
-    borderColor: 'black',
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    borderStyle: "dashed",
+    borderColor: "black",
     borderWidth: 1.4,
     borderRadius: 20,
     height: 55,
-    width:"50%",
-    justifyContent: 'center',
-    alignItems: 'center',
-     marginTop: 10,
-    paddingBottom:43,
-    margin:-30,
-    zIndex:2
+    width: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    paddingBottom: 43,
+    margin: -30,
+    zIndex: 2,
   },
-  
 });

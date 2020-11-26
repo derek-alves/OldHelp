@@ -19,7 +19,7 @@ function ServicesPage(){
 
   useEffect(()=>{
     loadServices();
-  },[services])
+  },[])
 
 return (
         <View style={styles.container}>
@@ -35,10 +35,9 @@ return (
 
              {
                services.map((service)=>(
-                <ServiceItem  key={service.id} title={service.title} description={service.description} price={service.price}/>
+                <ServiceItem  key={service.id} id={service.id} title={service.title} description={service.description} price={service.price}/>
                ))
              }
-                
                 
             </ScrollView>
             
