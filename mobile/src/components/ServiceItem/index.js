@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Image, Text ,Alert} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Image, Text, Alert, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import api from "../../services/api";
 
@@ -8,11 +8,14 @@ import { RectButton } from "react-native-gesture-handler";
 import styles from "./styles";
 
 const ServiceItem = (props) => {
-
+  const [visible, setVisible] = useState(false);
   async function handleCreateConnection() {
     try {
-      const response = await api.post(`/connection/${props.id}`);
-      Alert.alert("Aplicado com sucesso","Obrigado por se aplicar! \nAguarde um tempo até a confirmação do criador do serviço")
+      await api.post(`/connection/${props.id}`);
+      Alert.alert(
+        "Aplicado com sucesso",
+        "Obrigado por se aplicar! \nAguarde um tempo até a confirmação do criador do serviço"
+      );
     } catch (error) {
       throw error;
     }
@@ -34,10 +37,16 @@ const ServiceItem = (props) => {
         </Text>
 
         <View style={styles.buttonsContainer}>
-          <RectButton style={styles.contactButton} onPress={handleCreateConnection}>
+          <TouchableOpacity
+            disabled={visible}
+            style={styles.contactButton}
+            onPress={() => {
+              handleCreateConnection(), setVisible(true);
+            }}
+          >
             <AntDesign name="login" color="white" size={20} />
             <Text style={styles.contactButtonText}>Aplicar nesse serviço</Text>
-          </RectButton>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

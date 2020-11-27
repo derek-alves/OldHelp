@@ -35,7 +35,7 @@ return (
 
              {
                services.map((service)=>(
-                <ServiceItem  key={service.id} id={service.id} title={service.title} description={service.description} price={service.price}/>
+                <ServiceItem  disable={false} key={service.id} id={service.id} title={service.title} description={service.description} price={service.price}/>
                ))
              }
                 
