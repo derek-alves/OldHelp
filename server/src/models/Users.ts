@@ -1,6 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn,OneToMany, CreateDateColumn } from "typeorm";
-import Services from './Services';
-import Services_has_user from './Services_has_users';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  OneToMany,
+  CreateDateColumn,
+} from "typeorm";
+import Services from "./Services";
+import Services_has_user from "./Services_has_users";
 
 @Entity("users")
 class Users {
@@ -17,8 +24,8 @@ class Users {
   created_at: Date;
 
   @Column()
-  avatar:string;
-  
+  avatar: string;
+
   @Column()
   cpf: string;
 
@@ -28,17 +35,19 @@ class Users {
   @Column()
   telefone: string;
 
-  @OneToMany(()=>Services, service => service.user,{
-    cascade:['insert','update']
+  @OneToMany(() => Services, (service) => service.user, {
+    cascade: ["insert", "update"],
   })
-  @JoinColumn({name:'user_id'})
-  services:Services;
+  services: Services[];
 
-  @OneToMany(()=>Services_has_user, services_has_user => services_has_user.user_has_service,{
-    cascade:['insert','update']
-  })
-  @JoinColumn({name:'user_id'})
-  ServicesHasUser:Services_has_user;
+  @OneToMany(
+    () => Services_has_user,
+    (services_has_user) => services_has_user.user_has_service,
+    {
+      cascade: ["insert", "update"],
+    }
+  )
+  ServicesHasUser: Services_has_user[];
 }
 
 export default Users;

@@ -30,8 +30,7 @@ class Services {
   @OneToMany(()=>Services_has_user, services_has_user => services_has_user.services,{
     cascade:['insert','update']
   })
-  @JoinColumn({name:'service_id'})
-  services:Services_has_user;
+  services:Services_has_user[];
 }
 
 export default Services;
