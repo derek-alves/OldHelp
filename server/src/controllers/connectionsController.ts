@@ -1,22 +1,27 @@
 import { getConnection, getRepository, getManager } from "typeorm";
 import { Request, Response } from "express";
 import Connection from "../models/Services_has_users";
-import Services from "../models/Services";
-import User from "../models/Users";
-import { set } from "date-fns";
 
 export default {
   async deleteUsersInConnections(request: Request, response: Response) {
-    // const { id } = request.user;
-      const id = 2;
-       getRepository(Connection)
+      const {service,user} = request.query;
+    
+      getRepository(Connection)
       .createQueryBuilder("connection")
       .update()
       .set({ status: "aceito" })
-      .where({ user_id: id })
-      .andWhere("service_id =:id", { id })
-      .set({ status: "rejeitado" })
-      .where({ service_id: id });
+      .where({ user_id: user })
+      .andWhere("service_id = :id", {id:service})
+      .execute();
+      
+      getRepository(Connection)
+      .createQueryBuilder("connection")
+      .update()
+      .set({status:'Rejeitado'})
+      .where("service_id = :sId",{sId:service})
+      .execute();
+
+      
 
     return response.json({ message: "foi" });
   },
@@ -25,7 +30,7 @@ export default {
     const { id } = request.user;
 
     const entityManager = getManager();
-    const query = await entityManager.query(`select  svc.title , u."name" from services svc 
+    const query = await entityManager.query(`select svc.id ,svc.title , u."name", u.id user_id from services svc 
       join "ServicesHasUsers" shu
       on shu.service_id = svc.id 
       join users u 

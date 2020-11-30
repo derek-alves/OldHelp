@@ -23,14 +23,6 @@ export const Body = styled.View`
 
 export const Name = styled.Text`
   font-size: 25px;
-  margin-top:-35px;
   padding-bottom:10px;
   font-weight:bold;
 `;
-export const Description = styled.Text`
-  font-size: 20px;
-  margin:20px 20px 10px 22px;
-  padding-bottom:10px;
-  
-`;
-

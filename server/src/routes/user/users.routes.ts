@@ -16,6 +16,8 @@ usersRouter.get("/", ensureAuthenticated, userController.index);
 
 usersRouter.get("/show", ensureAuthenticated, userController.show);
 
+usersRouter.get("/show/:id", ensureAuthenticated, userController.showByID);
+
 usersRouter.post("/", userController.create);
 
 

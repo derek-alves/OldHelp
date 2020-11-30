@@ -8,6 +8,7 @@ import LandingPage from "../pages/LandingPage";
 import ServiceNotification from "../pages/ServiceNotification";
 import SignIn from "../pages/SignIn";
 import Profile from "../pages/Profile";
+import ProfileContact from '../pages/ProfileContact';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -22,9 +23,10 @@ function AuthRoutes() {
         <Screen name="CreateAccount" component={CreateAccount} />
         <Screen name="ServiceNotification" component={ServiceNotification} />
         <Screen name="Profile" component={Profile} />
+        <Screen name="ProfileContact" component={ProfileContact} />
       </Navigator>
     </NavigationContainer>
   );
 }
 
-export default AuthRoutes;
+export default AuthRoutes;''

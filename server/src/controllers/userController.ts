@@ -40,6 +40,20 @@ export default {
     }
   },
 
+  async showByID(request: Request, response: Response) {
+    try {
+      const { id } = request.params;
+
+      const userRepository = getRepository(Users);
+
+      const user = await userRepository.findOne(id);
+     
+      return response.json(user);
+    } catch (error) {
+      return response.status(404).json();
+    }
+  },
+
   async show(request: Request, response: Response) {
     try {
       const { id } = request.user;

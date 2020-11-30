@@ -57,6 +57,7 @@ export const ButtonsContainer = styled.View`
   display:flex;
   flex-direction:row;
   align-items:center;
+  margin-top:10px;
   
 `;
 export const FavoriteButton = styled.TouchableOpacity`

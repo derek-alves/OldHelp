@@ -43,11 +43,17 @@ const ServiceNotification = () => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         {
-        connections ? console.log(connections) : console.log("nem carregou")
-        
+         
+          connections.map((conn) => (
+            <CardNotification
+              key={Math.random().toString(36).substring(7)}
+              id={conn.id}
+              userid={conn.user_id}
+              service={conn.title}
+              name={conn.name}
+            />
+          ))
         }
-        
-        
       </ScrollView>
     </Container>
   );
