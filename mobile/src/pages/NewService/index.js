@@ -64,7 +64,7 @@ const CreateService = () => {
   <ScrollView
       keyboardShouldPersistTaps="handled"
     >
-      <Header title="Crie um novo serviço" />
+      <Header color="#04d361"  title="Crie um novo serviço" />
 
       
       <View

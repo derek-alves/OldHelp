@@ -13,7 +13,7 @@ export const Body = styled.View`
   width: 80%;
   height: 73%;
   margin-top: -80px;
-  padding-top: 130px;
+  padding-top: 100px;
   background: #fff;
   border-color: #e6e6f0;
   border-radius: 10px;

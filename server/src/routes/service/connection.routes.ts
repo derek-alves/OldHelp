@@ -12,6 +12,8 @@ connectionRouter.get("/", connectionController.indexConnections);
 
 connectionRouter.get("/users", connectionController.indexUsersConnections);
 
-connectionRouter.put("/userss", connectionController.deleteUsersInConnections);
+connectionRouter.patch("/user1", connectionController.deleteUsersInConnections1);
+
+connectionRouter.patch("/user2", connectionController.deleteUsersInConnections2);
 
 export default connectionRouter;

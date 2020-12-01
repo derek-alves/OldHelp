@@ -62,7 +62,7 @@ function Profile() {
   }, []);
   return (
     <Container>
-      <Header />
+      <Header  color="#04d361" title="Perfil"/>
 
       <ProfileContent>
         {services.avatar ? (
@@ -96,11 +96,12 @@ function Profile() {
           </TouchableOpacity>
         )}
 
-        <Body elevation={3}>
+        <Body>
+          
           <Name>{services.name}</Name>
-          <Text style={{ fontSize: 20 }}>{services.email}</Text>
+          <Text style={{ fontWeight:"bold",fontSize: 20 }}>{services.email}</Text>
 
-          <Description>ASdfhasudfhsaudfhsaudfhushfsudfhsufhsudfhasufdha</Description>
+          <Description>Sou enfermeiro com 5 anos de experiência em hospital publico. Atualmente trabalho como cuidador de idosos</Description>
         </Body>
       </ProfileContent>
     </Container>

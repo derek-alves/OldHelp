@@ -9,7 +9,7 @@ import backIcon from '../../assets/icons/back.png';
 
 import styles from './styles';
 
-const PageHeader = ({title}) => {
+const PageHeader = ({title,color}) => {
   const {goBack} = useNavigation();
 
   function handleGoBack(){
@@ -17,7 +17,7 @@ const PageHeader = ({title}) => {
   }
 
   return (
-  <View style={styles.container}>
+  <View style={{...styles.container,backgroundColor:color}}>
     <View style={styles.topBar}>
       <BorderlessButton onPress={handleGoBack}>
           <Image elevation={15} source={backIcon} resizeMode="contain"/>

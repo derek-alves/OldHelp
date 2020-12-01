@@ -7,8 +7,10 @@ import CreateAccount from "../pages/CreateAccount";
 import Profile from "../pages/Profile";
 import ProfileContact from "../pages/ProfileContact";
 
-import ServiceNotification from "../pages/ServiceNotification";
+
+import ServiceNotification from "./NotificationTab";
 import SignIn from "../pages/SignIn";
+import Favorites from "../pages/Favorites";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -23,6 +25,7 @@ function AppRoutes() {
         <Screen name="ServiceNotification" component={ServiceNotification} />
         <Screen name="Profile" component={Profile} />
         <Screen name="ProfileContact" component={ProfileContact} />
+        <Screen name="Favorites" component={Favorites} />
       </Navigator>
     </NavigationContainer>
   );

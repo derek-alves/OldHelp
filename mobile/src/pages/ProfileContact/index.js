@@ -6,18 +6,22 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Linking,
 } from "react-native";
 import Header from "../../components/PageHeader";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../services/api";
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { Container, ProfileContent, Body, Name } from "./styles";
 
-function ProfileContact({ route }) {
+function ProfileContact({ route, favorited }) {
   const { userid } = route.params;
 
   const { goBack } = useNavigation();
+
+  const [isFavorited, setIsFavorited] = useState(favorited);
 
   const [services, setServices] = useState([]);
 
@@ -26,12 +30,24 @@ function ProfileContact({ route }) {
     setServices(response.data);
   }
 
+  function handleToWhatApp() {
+    Linking.openURL(`whatsapp://send?phone=55${services.telefone}`);
+  }
+
+  function handleToggleFavorite() {
+    if(isFavorited){
+
+    }else{
+
+    }
+  }
+
   useEffect(() => {
     loadProfile();
   }, []);
   return (
     <Container>
-      <Header />
+      <Header color="#04d361" />
 
       <ProfileContent>
         {services.avatar ? (
@@ -54,16 +70,17 @@ function ProfileContact({ route }) {
               borderRadius: 100,
               marginTop: -110,
               zIndex: 2,
-              backgroundColor:'grey'
+              backgroundColor: "grey",
             }}
           />
         )}
 
-        <Body elevation={3}>
+        <Body>
           <Name>{services.name}</Name>
           <Text style={{ fontSize: 20 }}>{services.email}</Text>
 
           <TouchableOpacity
+            onPress={handleToWhatApp}
             elevation={5}
             style={{
               flexDirection: "row",

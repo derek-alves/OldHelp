@@ -5,10 +5,11 @@ import Home from "../pages/Home";
 import ServicesPages from "./ServicesTab";
 import CreateAccount from "../pages/CreateAccount";
 import LandingPage from "../pages/LandingPage";
-import ServiceNotification from "../pages/ServiceNotification";
+import ServiceNotification from "./NotificationTab";
 import SignIn from "../pages/SignIn";
 import Profile from "../pages/Profile";
 import ProfileContact from '../pages/ProfileContact';
+import Favorites from "../pages/Favorites";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -24,6 +25,7 @@ function AuthRoutes() {
         <Screen name="ServiceNotification" component={ServiceNotification} />
         <Screen name="Profile" component={Profile} />
         <Screen name="ProfileContact" component={ProfileContact} />
+        <Screen name="Favorites" component={Favorites} />
       </Navigator>
     </NavigationContainer>
   );

@@ -1,68 +1,66 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Ionicons} from '@expo/vector-icons';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
-import NewService from '../pages/NewService';
-import ServicesPage from '../pages/ServicesPage';
+import ServicesAccept from "../pages/ServicesAccept";
+import ServicesRejected from "../pages/ServicesRejected";
+import ServicesNotification from "../pages/ServiceNotification";
 
-const {Navigator,Screen} = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
-function NotificationTabs(){
-    return(
-      <Navigator
+function NotificationTabs() {
+  return (
+    <Navigator
       tabBarOptions={{
-        style:{
-          elevation:0,
-          shadowOpacity:0,
-          height:64
+        style: {
+          elevation: 0,
+          shadowOpacity: 0,
+          height: 64,
         },
-        tabStyle:{
-          flexDirection:'row',
-          alignItems:'center',
-          justifyContent:'center'
+        tabStyle: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
         },
-        iconStyle:{
-          flex:0,
-          width:20,
-          height:20
+        iconStyle: {
+          flex: 0,
+          width: 20,
+          height: 20,
         },
-        labelStyle:{
-          fontWeight:'bold',
-          fontSize:20,
-          marginLeft:16
+        labelStyle: {
+          fontWeight: "bold",
+          fontSize: 20,
         },
-        inactiveBackgroundColor:'#Fafafc',
-        activeBackgroundColor:'#ebebf5',
-        inactiveTintColor:'#c1bccc',
-        activeTintColor:'#04d361'
+        inactiveBackgroundColor: "#Fafafc",
+        activeBackgroundColor: "#ebebf5",
+        inactiveTintColor: "#c1bccc",
+        activeTintColor: "#04d361",
       }}
-      >
-        <Screen 
-        name="Services" 
-        component={ServicesPage}
+    >
+      <Screen
+        name="Pendente"
+        component={ServicesNotification}
         options={{
-          tabBarLabel:'Serviços',
-          tabBarIcon:({color,size}) => {
-            return(
-              <Ionicons name="ios-easel" size={size} color={color}/>
-            )
-          }
+          tabBarLabel: "Pendente",
         }}
-        />
-        <Screen 
-        name="NewService" 
-        component={NewService}
+      />
+      <Screen
+        name="Rejeitado"
+        component={ServicesRejected}
         options={{
-          tabBarLabel:'Novo Serviço',
-          tabBarIcon:({color,size}) => {
-            return(
-              <Ionicons name="ios-clipboard" size={size} color={color}/>
-            )
-          }
+          tabBarLabel: "Rejeitado",
         }}
-        />
-      </Navigator>
-    );
+      />
+
+      <Screen
+        name="Aceitos"
+        component={ServicesAccept}
+        options={{
+          tabBarLabel: "Aceito"
+        }}
+      />
+    </Navigator>
+  );
 }
 
 export default NotificationTabs;

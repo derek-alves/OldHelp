@@ -8,7 +8,7 @@ import styles from './styles';
 
 import api from '../../services/api';
 
-function ServicesPage(){
+function ServicesAccept(){
 
   const [services,setServices] = useState([]);
 
@@ -25,7 +25,7 @@ return (
         <View style={styles.container}>
             <PageHeader
             color="#04d361" 
-            title="Serviços disponíveis"/>
+            title="Serviços aceitos"/>
             <ScrollView 
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
@@ -47,4 +47,4 @@ return (
 );
 }
 
-export default ServicesPage;
+export default ServicesAccept;

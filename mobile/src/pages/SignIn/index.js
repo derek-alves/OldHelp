@@ -63,7 +63,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Header title="Login" />
+      <Header color="#04d361" title="Login" />
 
       <View
         style={{

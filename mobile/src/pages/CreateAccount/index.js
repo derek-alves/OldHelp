@@ -83,7 +83,7 @@ const CreateAccount = () => {
   return (
     <>
       <ScrollView keyboardShouldPersistTaps="handled">
-        <Header title="Informe os dados abaixo" />
+        <Header color="#04d361" title="Informe os dados abaixo" />
 
         <View
           style={{

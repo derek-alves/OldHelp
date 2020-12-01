@@ -9,8 +9,9 @@ export const Container = styled.View`
   border-radius:8px;
   margin-bottom:16px;
   overflow:hidden;
-  height:150px;
-  width:100%;
+  height:50px;
+  width:90%;
+  align-items:center;
   padding:0 20px;
   box-shadow: 30px 5px 5px #000;
 `;

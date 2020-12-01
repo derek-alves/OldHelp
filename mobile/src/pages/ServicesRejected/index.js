@@ -1,31 +1,37 @@
 import React,{useEffect,useState} from 'react';
 import {View,ScrollView} from 'react-native';
 
-import ServiceItem from '../../components/ServiceItem';
+import StatusCard from '../../components/StatusCard';
 
 import PageHeader from '../../components/PageHeader';
 import styles from './styles';
 
 import api from '../../services/api';
 
-function ServicesPage(){
+function ServicesRejected(){
 
-  const [services,setServices] = useState([]);
+  const [rejeitado,setRejeitado] = useState([]);
 
-  async function loadServices(){
-    const response = await api.get("/service");
-    setServices(response.data);
-  }
+    async function loadServices() {
+      const response = await api.get("/connection/users",{
+        params:{
+          status:'Rejeitado'
+        }
+      });
+
+      setRejeitado(response.data);
+    }
+    
+  
 
   useEffect(()=>{
     loadServices();
-  },[services])
-
+  },[rejeitado])
 return (
         <View style={styles.container}>
             <PageHeader
             color="#04d361" 
-            title="Serviços disponíveis"/>
+            title="Serviços rejeitados"/>
             <ScrollView 
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
@@ -36,8 +42,8 @@ return (
             >
 
              {
-               services.map((service)=>(
-                <ServiceItem  disable={false} key={service.id} id={service.id} title={service.title} description={service.description} price={service.price}/>
+               rejeitado.map((service)=>(
+                <StatusCard  key={Math.random().toString(36).substring(7)} user={service}/>
                ))
              }
                 
@@ -47,4 +53,4 @@ return (
 );
 }
 
-export default ServicesPage;
+export default ServicesRejected;
