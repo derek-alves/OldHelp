@@ -11,6 +11,7 @@ export const Container = styled.View`
   overflow:hidden;
   height:150px;
   width:100%;
+  margin-top:10px;
   padding:0 20px;
   box-shadow: 30px 5px 5px #000;
 `;
@@ -39,12 +40,13 @@ export const Cargo = styled.Text`
 export const Servico = styled.Text`
   font-size:15px;
   margin-top:4px;
+  margin-bottom:10px;
 `;
 
 export const AcceptButton = styled.TouchableOpacity`
   background-color:#04d361;
   height:45px;
-  width:100%;
+  width:78%;
   border-radius:8px;
   justify-content:center;
   align-items:center;
@@ -67,7 +69,7 @@ export const FavoriteButton = styled.TouchableOpacity`
   border-radius:8px;
   justify-content:center;
   align-items:center;
-  margin-right:8px;
+  margin-right:2px;
 `;
 
 export const TextAcceptButton =styled.Text`

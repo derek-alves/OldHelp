@@ -3,7 +3,7 @@ import { View, Image, Text, Alert, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import api from "../../services/api";
 
-import { RectButton } from "react-native-gesture-handler";
+
 
 import styles from "./styles";
 

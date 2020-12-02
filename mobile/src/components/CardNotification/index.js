@@ -49,7 +49,7 @@ const CardNotification = ({user, favorited}) => {
         },
       });
 
-      Alert.alert("Foi");
+      Alert.alert("Usuário aceito com sucesso","Entre em contato o quanto antes");
       navigation.navigate("ProfileContact", {
         userid: user.user_id,
       });
@@ -96,13 +96,6 @@ const CardNotification = ({user, favorited}) => {
       </Profile>
 
       <ButtonsContainer>
-        <FavoriteButton onPress={handleToggleFavorite} favorited={isFavorited}>
-          {isFavorited ? (
-            <Image source={UnfavoriteIcon} />
-          ) : (
-            <Image source={HearthOutLineIcon} />
-          )}
-        </FavoriteButton>
         <AcceptButton onPress={handleConfimConnection}>
           <TextAcceptButton >
             Confirmar

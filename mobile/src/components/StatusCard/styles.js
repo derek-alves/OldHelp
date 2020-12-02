@@ -9,6 +9,7 @@ export const Container = styled.View`
   overflow: hidden;
   height: 80px;
   width: 80%;
+  margin-top:20px;
   margin-left: 33px;
   align-items: center;
   padding: 10px 0px;

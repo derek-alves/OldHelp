@@ -34,13 +34,6 @@ function ProfileContact({ route, favorited }) {
     Linking.openURL(`whatsapp://send?phone=55${services.telefone}`);
   }
 
-  function handleToggleFavorite() {
-    if(isFavorited){
-
-    }else{
-
-    }
-  }
 
   useEffect(() => {
     loadProfile();

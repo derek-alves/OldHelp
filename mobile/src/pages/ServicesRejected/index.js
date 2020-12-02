@@ -26,12 +26,12 @@ function ServicesRejected(){
 
   useEffect(()=>{
     loadServices();
-  },[rejeitado])
+  },[])
 return (
         <View style={styles.container}>
             <PageHeader
             color="#04d361" 
-            title="Serviços rejeitados"/>
+            title="Aplicações rejeitadas"/>
             <ScrollView 
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{

@@ -1,50 +1,64 @@
-import React,{useEffect,useState} from 'react';
-import {View,ScrollView} from 'react-native';
+import React, { useEffect, useState } from "react";
+import { View, ScrollView } from "react-native";
 
-import ServiceItem from '../../components/ServiceItem';
+import UserAccepted from "../../components/UserAccepted";
 
-import PageHeader from '../../components/PageHeader';
-import styles from './styles';
+import PageHeader from "../../components/PageHeader";
+import styles from "./styles";
 
-import api from '../../services/api';
+import api from "../../services/api";
 
-function ServicesAccept(){
+import AsyncStorage from "@react-native-community/async-storage";
 
-  const [services,setServices] = useState([]);
+function ServicesAccept() {
+  const [services, setServices] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
-  async function loadServices(){
-    const response = await api.get("/service");
+  async function loadServices() {
+    const response = await api.get("/connection/users", {
+      params: {
+        status: "Aceito",
+      },
+    });
     setServices(response.data);
   }
-
-  useEffect(()=>{
+  useEffect(() => {
     loadServices();
-  },[services])
+  }, []);
 
-return (
-        <View style={styles.container}>
-            <PageHeader
-            color="#04d361" 
-            title="Serviços aceitos"/>
-            <ScrollView 
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingHorizontal:16,
-              paddingBottom:16  
-            }}
-            style={styles.serviceList}
-            >
+  useEffect(() => {
+    AsyncStorage.getItem("favorites").then((response) => {
+      if (response) {
+        const favoritedTeachers = JSON.parse(response);
+        const favoritedTeachersIds = favoritedTeachers.map((teacher) => {
+          return teacher.user_id;
+        });
+        setFavorites(favoritedTeachersIds);
+      }
+    });
+  }, []);
 
-             {
-               services.map((service)=>(
-                <ServiceItem  disable={false} key={service.id} id={service.id} title={service.title} description={service.description} price={service.price}/>
-               ))
-             }
-                
-            </ScrollView>
-            
-        </View>
-);
+  return (
+    <View style={styles.container}>
+      <PageHeader color="#04d361" title="Usuários aceitos" />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 16,
+          paddingBottom: 16,
+        }}
+        style={styles.serviceList}
+      >
+        {services.map((service) => (
+          <UserAccepted
+            favorited={favorites.includes(service.user_id)}
+            key={Math.random().toString(36).substring(7)}
+            user={service}
+          />
+        ))}
+      </ScrollView>
+    </View>
+  );
 }
 
 export default ServicesAccept;

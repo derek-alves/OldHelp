@@ -59,7 +59,7 @@ const SignIn = () => {
         return;
       }
     }
-  }, [signIn]);
+  }, []);
 
   return (
     <>
@@ -120,9 +120,7 @@ const SignIn = () => {
               </View>
             </TouchableOpacity>
           </Form>
-          <TouchableOpacity activeOpacity={0.3} onPress={() => {}}>
-            <Text style={styles.Recoverpassword}>Recuperar senha</Text>
-          </TouchableOpacity>
+
         </View>
       </View>
     </>

@@ -10,10 +10,10 @@ import backIcon from '../../assets/icons/back.png';
 import styles from './styles';
 
 const PageHeader = ({title,color}) => {
-  const {goBack} = useNavigation();
+  const {navigate} = useNavigation();
 
   function handleGoBack(){
-    goBack();
+   navigate('Home');
   }
 
   return (
